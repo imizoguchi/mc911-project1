@@ -40,12 +40,14 @@
       know about them.  */
    enum yytokentype {
      T_DIGIT = 258,
-     T_STRING = 259
+     T_STRING = 259,
+     T_PARAGRAPH = 260
    };
 #endif
 /* Tokens.  */
 #define T_DIGIT 258
 #define T_STRING 259
+#define T_PARAGRAPH 260
 
 
 
@@ -58,7 +60,7 @@ typedef union YYSTYPE
 	int intval;
 }
 /* Line 1529 of yacc.c.  */
-#line 62 "parser.h"
+#line 64 "parser.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

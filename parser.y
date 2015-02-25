@@ -14,13 +14,20 @@ int yylex();
 
 %token <intval> T_DIGIT
 %token <str> T_STRING
+%token <str> T_PARAGRAPH
 
 %%
 
 stmt_list:  	stmt ';'
 	 | 	stmt_list stmt ';'
 
-stmt: T_STRING '=' T_DIGIT     { printf("%s", $1); }
+stmt: cmd mandatory_arg { printf("%d", 1); }
+
+cmd:	'\\' T_STRING
+
+optional_arg:	'[' T_STRING ']'
+
+mandatory_arg:	'{' T_STRING '}'
 
 %%
 
