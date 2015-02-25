@@ -41,13 +41,13 @@
    enum yytokentype {
      T_DIGIT = 258,
      T_STRING = 259,
-     T_PARAGRAPH = 260
+     T_NEWLINE = 260
    };
 #endif
 /* Tokens.  */
 #define T_DIGIT 258
 #define T_STRING 259
-#define T_PARAGRAPH 260
+#define T_NEWLINE 260
 
 
 

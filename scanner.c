@@ -361,8 +361,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 10
-#define YY_END_OF_BUFFER 11
+#define YY_NUM_RULES 11
+#define YY_END_OF_BUFFER 12
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -372,8 +372,8 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[26] =
     {   0,
-        0,    0,   11,    9,   10,    1,    9,    7,    4,    8,
-        2,    5,    6,    1,    0,    2,    0,    0,    0,    0,
+        0,    0,   12,   10,    4,    1,   10,    8,    5,    9,
+        2,    6,    7,    1,    0,    2,    0,    0,    0,    0,
         0,    0,    0,    3,    0
     } ;
 
@@ -648,7 +648,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 10 "scanner.l"
+#line 11 "scanner.l"
 
 
 
@@ -737,12 +737,12 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "scanner.l"
+#line 14 "scanner.l"
 {return T_DIGIT;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "scanner.l"
+#line 15 "scanner.l"
 {
 			yylval.str = (char*) strdup(yytext);	
 			return T_STRING;
@@ -750,47 +750,53 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "scanner.l"
+#line 20 "scanner.l"
 {}
 	YY_BREAK
 case 4:
+/* rule 4 can match eol */
 YY_RULE_SETUP
-#line 20 "scanner.l"
-{return '\\';}
+#line 21 "scanner.l"
+{ return T_NEWLINE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "scanner.l"
-{return '{';}
+#line 22 "scanner.l"
+{return '\\';}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "scanner.l"
-{return '}';}
+#line 23 "scanner.l"
+{return '{';}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "scanner.l"
-{return '[';}
+#line 24 "scanner.l"
+{return '}';}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "scanner.l"
-{return ']';}
+#line 25 "scanner.l"
+{return '[';}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "scanner.l"
+#line 26 "scanner.l"
+{return ']';}
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 27 "scanner.l"
 {
 	printf("Caracter %c (ASCII %d) inesperado.\n", yytext[0], yytext[0]);
 }
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 29 "scanner.l"
+#line 31 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 794 "scanner.c"
+#line 800 "scanner.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1787,7 +1793,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 29 "scanner.l"
+#line 31 "scanner.l"
 
 
 

@@ -14,16 +14,23 @@ int yylex();
 
 %token <intval> T_DIGIT
 %token <str> T_STRING
-%token <str> T_PARAGRAPH
+%token <void> T_NEWLINE
+%type <str> cmd
 
 %%
 
-stmt_list:  	stmt ';'
-	 | 	stmt_list stmt ';'
+stmt_list:  	stmt newlines
+	 | 	stmt_list stmt newlines
+	 | newlines
 
-stmt: cmd mandatory_arg { printf("%d", 1); }
+newlines : T_NEWLINE | newlines T_NEWLINE
 
-cmd:	'\\' T_STRING
+stmt: cmd mandatory_arg
+		{ printf("reduce stmt: %s", $1); }
+	| cmd optional_arg mandatory_arg
+		{ printf("reduce stmt with optional: %s", $1); }
+
+cmd:	'\\' T_STRING { printf("reduce cmd: %s", $2); $$ = $2; }
 
 optional_arg:	'[' T_STRING ']'
 
@@ -40,7 +47,6 @@ void yyerror(const char* errmsg)
 int yywrap(void){
 	return 1;
 }
-
 
 int main()
 {

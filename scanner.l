@@ -2,7 +2,8 @@
 #include "parser.h" 
 %}
 
-WHITESPACE [\s\n]+
+WHITESPACE [\s]+
+NEWLINE "\n"
 STRING [a-z][a-zA-Z0-9]*
 DIGIT  [0-9]+
 ANY_CHAR .
@@ -17,6 +18,7 @@ ANY_CHAR .
 		}
 
 WHITESPACE {}
+"\n" { return T_NEWLINE; }
 "\\"	{return '\\';}
 "{"		{return '{';}
 "}"		{return '}';}
