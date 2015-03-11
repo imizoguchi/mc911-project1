@@ -26,20 +26,7 @@ char buffer[256];
 %token <str> T_STRING
 %token <str> T_ANY
 %token <void> T_NEWLINE
-%token <str> T_DOCUMENTCLASS
-%token <str> T_USEPACKAGE
-%token <str> T_TITLE
-%token <str> T_AUTHOR
-%token <str> T_BEGIN
-%token <str> T_END
-%token <str> T_MAKETITLE
-%token <str> T_BOLD
-%token <str> T_ITALIC
-%token <str> T_INCLUDEGRAPHICS
-%token <str> T_CITE
-%token <str> T_BIBITEM
-%token <str> T_ITEM
-
+%token <str> T_LINEFEED
 %type <str> cmd
 %type <str> optional_arg
 %type <str> mandatory_arg
@@ -52,14 +39,13 @@ stmt_list:	stmt
 		| 	stmt_list stmt
 
 stmt: cmd 
-	| T_NEWLINE
+	| T_NEWLINE { printf("<p>\n");}
 	| text
 		{ printf("%s\n", $1); }
 
 
 cmd:	'\\' T_STRING optional_arg mandatory_arg
-			{ 	//printf("reduce cmd %s mand_arg: %s opt_arg: %s\n", $2, $3, $4);
-				$$ = $2; }
+			{ $$ = $2; }
 
 	|	'\\' T_STRING mandatory_arg
 		{ executeCommand($2, $3, NULL); $$ = $2; }
@@ -84,6 +70,7 @@ optional_text:
 
 anything:	T_STRING	{ $$ = $1; }
 		|	T_ANY		{ $$ = $1; }
+		|	T_LINEFEED	{ $$ = " "; }
 		|	T_DIGIT		{	sprintf(buffer, "%d", $1);
 							$$ = strdup(buffer);}
 %%

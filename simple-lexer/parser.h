@@ -43,7 +43,7 @@
      T_STRING = 259,
      T_ANY = 260,
      T_NEWLINE = 261,
-     T_DOCUMENTCLASS = 262
+     T_LINEFEED = 262
    };
 #endif
 /* Tokens.  */
@@ -51,7 +51,7 @@
 #define T_STRING 259
 #define T_ANY 260
 #define T_NEWLINE 261
-#define T_DOCUMENTCLASS 262
+#define T_LINEFEED 262
 
 
 
