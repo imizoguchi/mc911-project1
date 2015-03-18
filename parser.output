@@ -1,0 +1,891 @@
+Terminals which are not used
+
+   T_NEWLINE
+   T_WHITESPACE
+
+
+State 22 conflicts: 4 shift/reduce
+
+
+Grammar
+
+    0 $accept: stmt_list $end
+
+    1 stmt_list: stmt
+    2          | stmt_list stmt
+
+    3 stmt: cmd
+    4     | text
+    5     | T_PARAGRAPH
+
+    6 cmd: T_DOCUMENTCLASS '[' text ']' '{' text '}'
+    7    | T_DOCUMENTCLASS '{' text '}'
+    8    | T_USEPACKAGE '[' text ']' '{' text '}'
+    9    | T_USEPACKAGE '{' text '}'
+   10    | T_TITLE '{' text '}'
+   11    | T_AUTHOR '{' text '}'
+   12    | T_BEGIN '{' text '}'
+   13    | T_END '{' text '}'
+   14    | T_MAKETITLE
+   15    | T_BOLD '{' text '}'
+   16    | T_ITALIC '{' text '}'
+   17    | T_INCLUDEGRAPHICS '{' text '}'
+   18    | T_CITE '{' text '}'
+   19    | T_BIBITEM '{' text '}'
+   20    | T_ITEM '[' text ']'
+   21    | T_ITEM
+
+   22 text: subtext
+   23     | text subtext
+
+   24 subtext: T_STRING
+   25        | T_ANY
+   26        | T_DIGIT
+   27        | T_CIF
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'[' (91) 6 8 20
+']' (93) 6 8 20
+'{' (123) 6 7 8 9 10 11 12 13 15 16 17 18 19
+'}' (125) 6 7 8 9 10 11 12 13 15 16 17 18 19
+error (256)
+T_DIGIT (258) 26
+T_STRING (259) 24
+T_ANY (260) 25
+T_PARAGRAPH (261) 5
+T_NEWLINE (262)
+T_WHITESPACE (263)
+T_DOCUMENTCLASS (264) 6 7
+T_USEPACKAGE (265) 8 9
+T_TITLE (266) 10
+T_AUTHOR (267) 11
+T_BEGIN (268) 12
+T_END (269) 13
+T_MAKETITLE (270) 14
+T_BOLD (271) 15
+T_ITALIC (272) 16
+T_INCLUDEGRAPHICS (273) 17
+T_CITE (274) 18
+T_BIBITEM (275) 19
+T_ITEM (276) 20 21
+T_CIF (277) 27
+
+
+Nonterminals, with rules where they appear
+
+$accept (27)
+    on left: 0
+stmt_list (28)
+    on left: 1 2, on right: 0 2
+stmt (29)
+    on left: 3 4 5, on right: 1 2
+cmd (30)
+    on left: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21,
+    on right: 3
+text (31)
+    on left: 22 23, on right: 4 6 7 8 9 10 11 12 13 15 16 17 18 19
+    20 23
+subtext (32)
+    on left: 24 25 26 27, on right: 22 23
+
+
+state 0
+
+    0 $accept: . stmt_list $end
+
+    T_DIGIT            shift, and go to state 1
+    T_STRING           shift, and go to state 2
+    T_ANY              shift, and go to state 3
+    T_PARAGRAPH        shift, and go to state 4
+    T_DOCUMENTCLASS    shift, and go to state 5
+    T_USEPACKAGE       shift, and go to state 6
+    T_TITLE            shift, and go to state 7
+    T_AUTHOR           shift, and go to state 8
+    T_BEGIN            shift, and go to state 9
+    T_END              shift, and go to state 10
+    T_MAKETITLE        shift, and go to state 11
+    T_BOLD             shift, and go to state 12
+    T_ITALIC           shift, and go to state 13
+    T_INCLUDEGRAPHICS  shift, and go to state 14
+    T_CITE             shift, and go to state 15
+    T_BIBITEM          shift, and go to state 16
+    T_ITEM             shift, and go to state 17
+    T_CIF              shift, and go to state 18
+
+    stmt_list  go to state 19
+    stmt       go to state 20
+    cmd        go to state 21
+    text       go to state 22
+    subtext    go to state 23
+
+
+state 1
+
+   26 subtext: T_DIGIT .
+
+    $default  reduce using rule 26 (subtext)
+
+
+state 2
+
+   24 subtext: T_STRING .
+
+    $default  reduce using rule 24 (subtext)
+
+
+state 3
+
+   25 subtext: T_ANY .
+
+    $default  reduce using rule 25 (subtext)
+
+
+state 4
+
+    5 stmt: T_PARAGRAPH .
+
+    $default  reduce using rule 5 (stmt)
+
+
+state 5
+
+    6 cmd: T_DOCUMENTCLASS . '[' text ']' '{' text '}'
+    7    | T_DOCUMENTCLASS . '{' text '}'
+
+    '['  shift, and go to state 24
+    '{'  shift, and go to state 25
+
+
+state 6
+
+    8 cmd: T_USEPACKAGE . '[' text ']' '{' text '}'
+    9    | T_USEPACKAGE . '{' text '}'
+
+    '['  shift, and go to state 26
+    '{'  shift, and go to state 27
+
+
+state 7
+
+   10 cmd: T_TITLE . '{' text '}'
+
+    '{'  shift, and go to state 28
+
+
+state 8
+
+   11 cmd: T_AUTHOR . '{' text '}'
+
+    '{'  shift, and go to state 29
+
+
+state 9
+
+   12 cmd: T_BEGIN . '{' text '}'
+
+    '{'  shift, and go to state 30
+
+
+state 10
+
+   13 cmd: T_END . '{' text '}'
+
+    '{'  shift, and go to state 31
+
+
+state 11
+
+   14 cmd: T_MAKETITLE .
+
+    $default  reduce using rule 14 (cmd)
+
+
+state 12
+
+   15 cmd: T_BOLD . '{' text '}'
+
+    '{'  shift, and go to state 32
+
+
+state 13
+
+   16 cmd: T_ITALIC . '{' text '}'
+
+    '{'  shift, and go to state 33
+
+
+state 14
+
+   17 cmd: T_INCLUDEGRAPHICS . '{' text '}'
+
+    '{'  shift, and go to state 34
+
+
+state 15
+
+   18 cmd: T_CITE . '{' text '}'
+
+    '{'  shift, and go to state 35
+
+
+state 16
+
+   19 cmd: T_BIBITEM . '{' text '}'
+
+    '{'  shift, and go to state 36
+
+
+state 17
+
+   20 cmd: T_ITEM . '[' text ']'
+   21    | T_ITEM .
+
+    '['  shift, and go to state 37
+
+    $default  reduce using rule 21 (cmd)
+
+
+state 18
+
+   27 subtext: T_CIF .
+
+    $default  reduce using rule 27 (subtext)
+
+
+state 19
+
+    0 $accept: stmt_list . $end
+    2 stmt_list: stmt_list . stmt
+
+    $end               shift, and go to state 38
+    T_DIGIT            shift, and go to state 1
+    T_STRING           shift, and go to state 2
+    T_ANY              shift, and go to state 3
+    T_PARAGRAPH        shift, and go to state 4
+    T_DOCUMENTCLASS    shift, and go to state 5
+    T_USEPACKAGE       shift, and go to state 6
+    T_TITLE            shift, and go to state 7
+    T_AUTHOR           shift, and go to state 8
+    T_BEGIN            shift, and go to state 9
+    T_END              shift, and go to state 10
+    T_MAKETITLE        shift, and go to state 11
+    T_BOLD             shift, and go to state 12
+    T_ITALIC           shift, and go to state 13
+    T_INCLUDEGRAPHICS  shift, and go to state 14
+    T_CITE             shift, and go to state 15
+    T_BIBITEM          shift, and go to state 16
+    T_ITEM             shift, and go to state 17
+    T_CIF              shift, and go to state 18
+
+    stmt     go to state 39
+    cmd      go to state 21
+    text     go to state 22
+    subtext  go to state 23
+
+
+state 20
+
+    1 stmt_list: stmt .
+
+    $default  reduce using rule 1 (stmt_list)
+
+
+state 21
+
+    3 stmt: cmd .
+
+    $default  reduce using rule 3 (stmt)
+
+
+state 22
+
+    4 stmt: text .
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    T_DIGIT   [reduce using rule 4 (stmt)]
+    T_STRING  [reduce using rule 4 (stmt)]
+    T_ANY     [reduce using rule 4 (stmt)]
+    T_CIF     [reduce using rule 4 (stmt)]
+    $default  reduce using rule 4 (stmt)
+
+    subtext  go to state 40
+
+
+state 23
+
+   22 text: subtext .
+
+    $default  reduce using rule 22 (text)
+
+
+state 24
+
+    6 cmd: T_DOCUMENTCLASS '[' . text ']' '{' text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 41
+    subtext  go to state 23
+
+
+state 25
+
+    7 cmd: T_DOCUMENTCLASS '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 42
+    subtext  go to state 23
+
+
+state 26
+
+    8 cmd: T_USEPACKAGE '[' . text ']' '{' text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 43
+    subtext  go to state 23
+
+
+state 27
+
+    9 cmd: T_USEPACKAGE '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 44
+    subtext  go to state 23
+
+
+state 28
+
+   10 cmd: T_TITLE '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 45
+    subtext  go to state 23
+
+
+state 29
+
+   11 cmd: T_AUTHOR '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 46
+    subtext  go to state 23
+
+
+state 30
+
+   12 cmd: T_BEGIN '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 47
+    subtext  go to state 23
+
+
+state 31
+
+   13 cmd: T_END '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 48
+    subtext  go to state 23
+
+
+state 32
+
+   15 cmd: T_BOLD '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 49
+    subtext  go to state 23
+
+
+state 33
+
+   16 cmd: T_ITALIC '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 50
+    subtext  go to state 23
+
+
+state 34
+
+   17 cmd: T_INCLUDEGRAPHICS '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 51
+    subtext  go to state 23
+
+
+state 35
+
+   18 cmd: T_CITE '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 52
+    subtext  go to state 23
+
+
+state 36
+
+   19 cmd: T_BIBITEM '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 53
+    subtext  go to state 23
+
+
+state 37
+
+   20 cmd: T_ITEM '[' . text ']'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 54
+    subtext  go to state 23
+
+
+state 38
+
+    0 $accept: stmt_list $end .
+
+    $default  accept
+
+
+state 39
+
+    2 stmt_list: stmt_list stmt .
+
+    $default  reduce using rule 2 (stmt_list)
+
+
+state 40
+
+   23 text: text subtext .
+
+    $default  reduce using rule 23 (text)
+
+
+state 41
+
+    6 cmd: T_DOCUMENTCLASS '[' text . ']' '{' text '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    ']'       shift, and go to state 55
+
+    subtext  go to state 40
+
+
+state 42
+
+    7 cmd: T_DOCUMENTCLASS '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 56
+
+    subtext  go to state 40
+
+
+state 43
+
+    8 cmd: T_USEPACKAGE '[' text . ']' '{' text '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    ']'       shift, and go to state 57
+
+    subtext  go to state 40
+
+
+state 44
+
+    9 cmd: T_USEPACKAGE '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 58
+
+    subtext  go to state 40
+
+
+state 45
+
+   10 cmd: T_TITLE '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 59
+
+    subtext  go to state 40
+
+
+state 46
+
+   11 cmd: T_AUTHOR '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 60
+
+    subtext  go to state 40
+
+
+state 47
+
+   12 cmd: T_BEGIN '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 61
+
+    subtext  go to state 40
+
+
+state 48
+
+   13 cmd: T_END '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 62
+
+    subtext  go to state 40
+
+
+state 49
+
+   15 cmd: T_BOLD '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 63
+
+    subtext  go to state 40
+
+
+state 50
+
+   16 cmd: T_ITALIC '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 64
+
+    subtext  go to state 40
+
+
+state 51
+
+   17 cmd: T_INCLUDEGRAPHICS '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 65
+
+    subtext  go to state 40
+
+
+state 52
+
+   18 cmd: T_CITE '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 66
+
+    subtext  go to state 40
+
+
+state 53
+
+   19 cmd: T_BIBITEM '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 67
+
+    subtext  go to state 40
+
+
+state 54
+
+   20 cmd: T_ITEM '[' text . ']'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    ']'       shift, and go to state 68
+
+    subtext  go to state 40
+
+
+state 55
+
+    6 cmd: T_DOCUMENTCLASS '[' text ']' . '{' text '}'
+
+    '{'  shift, and go to state 69
+
+
+state 56
+
+    7 cmd: T_DOCUMENTCLASS '{' text '}' .
+
+    $default  reduce using rule 7 (cmd)
+
+
+state 57
+
+    8 cmd: T_USEPACKAGE '[' text ']' . '{' text '}'
+
+    '{'  shift, and go to state 70
+
+
+state 58
+
+    9 cmd: T_USEPACKAGE '{' text '}' .
+
+    $default  reduce using rule 9 (cmd)
+
+
+state 59
+
+   10 cmd: T_TITLE '{' text '}' .
+
+    $default  reduce using rule 10 (cmd)
+
+
+state 60
+
+   11 cmd: T_AUTHOR '{' text '}' .
+
+    $default  reduce using rule 11 (cmd)
+
+
+state 61
+
+   12 cmd: T_BEGIN '{' text '}' .
+
+    $default  reduce using rule 12 (cmd)
+
+
+state 62
+
+   13 cmd: T_END '{' text '}' .
+
+    $default  reduce using rule 13 (cmd)
+
+
+state 63
+
+   15 cmd: T_BOLD '{' text '}' .
+
+    $default  reduce using rule 15 (cmd)
+
+
+state 64
+
+   16 cmd: T_ITALIC '{' text '}' .
+
+    $default  reduce using rule 16 (cmd)
+
+
+state 65
+
+   17 cmd: T_INCLUDEGRAPHICS '{' text '}' .
+
+    $default  reduce using rule 17 (cmd)
+
+
+state 66
+
+   18 cmd: T_CITE '{' text '}' .
+
+    $default  reduce using rule 18 (cmd)
+
+
+state 67
+
+   19 cmd: T_BIBITEM '{' text '}' .
+
+    $default  reduce using rule 19 (cmd)
+
+
+state 68
+
+   20 cmd: T_ITEM '[' text ']' .
+
+    $default  reduce using rule 20 (cmd)
+
+
+state 69
+
+    6 cmd: T_DOCUMENTCLASS '[' text ']' '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 71
+    subtext  go to state 23
+
+
+state 70
+
+    8 cmd: T_USEPACKAGE '[' text ']' '{' . text '}'
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+
+    text     go to state 72
+    subtext  go to state 23
+
+
+state 71
+
+    6 cmd: T_DOCUMENTCLASS '[' text ']' '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 73
+
+    subtext  go to state 40
+
+
+state 72
+
+    8 cmd: T_USEPACKAGE '[' text ']' '{' text . '}'
+   23 text: text . subtext
+
+    T_DIGIT   shift, and go to state 1
+    T_STRING  shift, and go to state 2
+    T_ANY     shift, and go to state 3
+    T_CIF     shift, and go to state 18
+    '}'       shift, and go to state 74
+
+    subtext  go to state 40
+
+
+state 73
+
+    6 cmd: T_DOCUMENTCLASS '[' text ']' '{' text '}' .
+
+    $default  reduce using rule 6 (cmd)
+
+
+state 74
+
+    8 cmd: T_USEPACKAGE '[' text ']' '{' text '}' .
+
+    $default  reduce using rule 8 (cmd)

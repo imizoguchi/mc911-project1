@@ -34,8 +34,7 @@ int state;
 %token <str> T_STRING
 %token <str> T_ANY
 %token <str> T_PARAGRAPH
-%token <void> T_NEWLINE
-%token <void> T_WHITESPACE
+%token <str> T_NEWLINE
 %token <str> T_DOCUMENTCLASS
 %token <str> T_USEPACKAGE
 %token <str> T_TITLE
@@ -49,6 +48,7 @@ int state;
 %token <str> T_CITE
 %token <str> T_BIBITEM
 %token <str> T_ITEM
+%token <str> T_ESC
 
 %type <str> cmd
 %type <str> text
@@ -60,37 +60,20 @@ stmt_list:	stmt
 		| 	stmt_list stmt
 
 stmt:	cmd
-	| text {
-			printf("%s", $1);
+	| subtext {
+			if(state == 1)
+				printf("%s", $1);
 		}
 	| T_PARAGRAPH {
-			if(state == 0) {
-					printf("\n\n");
-				} else {
+			if(state == 1) {
 					printf("<p>");
 				}
 		}
 
 cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
-			{
-				if(state == 0)
-					printf("%s[%s]{%s}", $1, $3, $6);
-			}
 	|	T_DOCUMENTCLASS '{' text '}'
-			{
-				if(state == 0)
-					printf("%s{%s}", $1, $3);
-			}
 	|	T_USEPACKAGE '[' text ']' '{' text '}'
-			{
-				if(state == 0)
-					printf("%s[%s]{%s}", $1, $3, $6);
-			}
 	|	T_USEPACKAGE '{' text '}'
-			{
-				if(state == 0)
-					printf("%s{%s}", $1, $3);
-			}
 	|	T_TITLE '{' text '}'
 			{
 				if(state == 0) {
@@ -107,9 +90,7 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 			}
 	|	T_BEGIN '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					if(streq($3,"itemize")) {
 						printf("<ul>\n");
 					} else if(streq($3,"thebibliography")) {
@@ -119,9 +100,7 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 			}
 	|	T_END '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					if(streq($3,"itemize")) {
 						printf("</ul>\n");
 					}  else if(streq($3,"thebibliography")) {
@@ -131,41 +110,31 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 			}
 	|	T_MAKETITLE
 			{
-				if(state == 0) {
-					printf("%s", $1);
-				} else {
+				if(state == 1) {
 					printf("<h1>%s</h1><h2>%s</h2>\n", buf_title, buf_author);
 				}
 			}
 	|	T_BOLD '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					printf("<b>%s</b>", $3);
 				}
 			}
 	|	T_ITALIC '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					printf("<i>%s</i>", $3);
 				}
 			}
 	|	T_INCLUDEGRAPHICS '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					printf("<img src=\"%s\" />", $3);
 				}
 			}
 	|	T_CITE '{' text '}'
 			{
-				if(state == 0) {
-					printf("%s{%s}", $1, $3);
-				} else {
+				if(state == 1) {
 					for(int i = 0; i < refCount; i++)
 						if(streq(reference[i], $3)) {
 							printf("[%d]", i);
@@ -176,7 +145,6 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 	|	T_BIBITEM '{' text '}'
 			{
 				if(state == 0) {
-					printf("%s{%s}", $1, $3);
 					reference[refCount] = strdup($3);
 					refCount++;
 				} else {
@@ -185,16 +153,12 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 				}
 			}
 	|	T_ITEM '[' text ']' {
-				if(state == 0) {
-					printf("%s[%s]", $1, $3);
-				} else {
+				if(state == 1) {
 					printf("<li style=\"display:block\"><b>%s</b>", $3);
 				}
 			}
 	|	T_ITEM {
-				if(state == 0) {
-					printf("%s", $1);
-				} else {
+				if(state == 1) {
 					printf("<li>");
 				}
 			}
@@ -213,6 +177,14 @@ subtext:	T_STRING {
 		|	T_DIGIT {
 				$$ = "Number";
 			}
+		|	T_ESC {
+				$$ = (char*)malloc(sizeof(char)*2);
+				$$[0] = $1[1];
+				$$[1] = '\0';
+		}
+		|	T_NEWLINE {
+				$$ = " ";
+		}
 %%
 
 void yyerror(const char* errmsg)
@@ -220,80 +192,8 @@ void yyerror(const char* errmsg)
 	printf("***Error: %s\n", errmsg);
 }
 
-
 int yywrap(void){
 	return 1;
-}
-
-char *treat_special_characters(char *str) {
-	if(streq(str, "Ç")) {
-		return "&Ccedil;";
-	} else if(streq(str, "ç")) {
-		return "&ccedil;";
-
-	} else if(streq(str, "Á")) {
-		return "&Aacute;";
-	} else if(streq(str, "á")) {
-		return "&aacute;";
-	} else if(streq(str, "À")) {
-		return "&Agrave;";
-	} else if(streq(str, "à")) {
-		return "&agrave;";
-	} else if(streq(str, "Â")) {
-		return "&Acirc;";
-	} else if(streq(str, "â")) {
-		return "&acirc;";
-	} else if(streq(str, "Ã")) {
-		return "&Atilde;";
-	} else if(streq(str, "ã")) {
-		return "&atilde;";
-
-	} else if(streq(str, "É")) {
-		return "&Eacute;";
-	} else if(streq(str, "é")) {
-		return "&eacute;";
-	} else if(streq(str, "È")) {
-		return "&Egrave;";
-	} else if(streq(str, "è")) {
-		return "&egrave;";
-	} else if(streq(str, "Ê")) {
-		return "&Ecirc;";
-	} else if(streq(str, "ê")) {
-		return "&ecirc;";
-
-	} else if(streq(str, "Í")) {
-		return "&Iacute;";
-	} else if(streq(str, "í")) {
-		return "&iacute;";
-
-	} else if(streq(str, "Ó")) {
-		return "&Oacute;";
-	} else if(streq(str, "ó")) {
-		return "&oacute;";
-	} else if(streq(str, "Ò")) {
-		return "&Ograve;";
-	} else if(streq(str, "ò")) {
-		return "&ograve;";
-	} else if(streq(str, "Ô")) {
-		return "&Ocirc;";
-	} else if(streq(str, "ô")) {
-		return "&ocirc;";
-	} else if(streq(str, "Õ")) {
-		return "&Otilde;";
-	} else if(streq(str, "õ")) {
-		return "&otilde;";
-
-	} else if(streq(str, "Ú")) {
-		return "&Uacute;";
-	} else if(streq(str, "ú")) {
-		return "&uacute;";
-	} else if(streq(str, "Ù")) {
-		return "&Ugrave;";
-	} else if(streq(str, "ù")) {
-		return "&ugrave;";
-	}
-
-	return str;
 }
 
 int streq(char *str1, char *str2) {
@@ -329,17 +229,16 @@ char* concat(int count, ...)
 int main(int argc, char *argv[])
 {
 	yyin = fopen(argv[1], "r");
-	freopen("my_stdout", "w", stdout);
 	state = 0;
 	yyparse();
 
 	freopen(argv[2], "w", stdout);
-	yyin = fopen("my_stdout", "r");
+	yyin = fopen(argv[1], "r");
 
 	state = 1;
 
 	// Header
-	printf("<html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script><script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script></head><body>");
+	printf("<html><head><meta charset=\"UTF-8\"><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script><script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script></head><body>");
 	
 	yyparse();
 	

@@ -1,20 +1,36 @@
-<html><head><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script></head><body><p>
+<html><head><meta charset="UTF-8"><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script></head><body><p>
 
 
 
+<p><title>Plano de trabalho - Mestrado</title>
 
 <p>
-<h1>Sistemas de recomendacoes</h1><h2>Alex Grilo</h2>
-<p><b>Introducao</b><p>O objetivo deste relatorio e descrever os assuntos estudados durante a disciplina de MC032 no segundo semestre de Number. O principal interessedeste trabalho foi pesquisar na literatura sobreo problema de sistemas de recomendacoes e diferentes abordagens para resolve-lo. Na secao Number e descrito em linhas gerais o que e um sistema de recomendacoes. Nas secoes Number e Number sao mostradas asprincipais ideias encontradas nos trabalhos  ,respectivamente. Na secao Number encontra-se a conclusao do estudo e ideias para trabalhos futuros.<p><b>Sistemas de recomendacoes</b><p>Um sistema de recomendacoes tem como objetivo recomendar a usuariosprodutos que o agradem. Para isso, o sistema de recomedacoes se baseiainicialmente em respostas ja conhecidas de outros usuarios e algumainformacao sobre o usuario que deseja obter uma recomendacao. O conjunto de informacao inicial que o sistema de recomendacoes japossui e utilizado para comparar com a informacao obtida do usuarioem questao para tentar deduzir quais outros produtos interessamao usuario. <p><b>Competitive Recommendation Systems</b><p><i>Introducao</i><p>A ideia basica desta abordagem e reduzir o problema de sistema de recomendacoesno problema de reconstrucao de matrizes a partir de informacoes parciais da mesma. Foram utilizadas estrategias de reconstrucao de matrizesbaseadas na tecnica de SVD, encontrando boas aproximacoespara a matriz original <p><i>Divisao em tipos</i><p>Assume-se que os usuarios podem ser divididos em grupos com interesses semelhantes,classificando-os em tipos. Consideraremos que $k$ seja o numero de tipos, onde $k$ euma constante que nao depende do numero de usuarios.<p><i>Qualidade dos algoritmos</i><p>Um bom algoritmo de recomendacoes deve dar boas recomendacoes utilizando o minimo de informacao possivel. Sao estabelecidas Number metricas para medir a qualidade de um algoritmode recomendacoes.<p> Um algoritmo e $c-competitivo$ $para$ $amostragem$ se usa somente $ck$linhas e colunas da matriz para recomendar mais produtos.<p>Um algoritmo e $f-competitivo$ $para$ $utilidade$se faz boas recomendacoes a $fm$ usuarios, onde $m$ e o numero de usuarios. <p><i>Notacao</i><p>Nesta secao, a seguinte notacao sera utilizada:<p><ul>
+<h1>Plano de trabalho - Mestrado</h1><h2>Alex Bredariol Grilo</h2>
+<p><b>Computacao quantica</b><p>Deseja-se $ neste & projeto %  _ realizar um estudo em largura nos temas em computacao quantica e
+escolher alguns pontos especificos deste estudo e fazer um aprofundamento, buscando
+estudar os avancos mais recentes da area e tentar contribuir para a
+evolucao do conhecimento nesta area. Ha o objetivo do resultado do estudo se tornar uma introducao ao tema de computacao
+quantica na lingua portuguesa<p>Topicos que serao cobertos no estudo em largura da area em computacao quantica:
+<ul>
 
-<li style="display:block"><b>A</b>
- matriz de recomendacao original<li style="display:block"><b>Aij</b>
- valor da utilidade do produto j para o usuario i<li style="display:block"><b>A(i)</b><p> i-esima linha da matriz A, que corresponde aovetor de utilidades do i-esimo usuario.<li style="display:block"><b>A(i)</b><p> i-esima coluna a matriz A, que corresponde a utilidade de um produto para todos os usuarios.<li style="display:block"><b>Ak</b>
- Melhor aproximacao com posto k de A, obtida atraves da tecnica de SVD.<li style="display:block"><b>air</b><p> valor da utilidade do r-esimo produto com maior utilidadepara o usuario i </ul>
-<p><i>Reconstrucao de matrizes</i><p><i>Escolha das linhas</i><p>A escolha de um numero constante de linhas segue a ideia de que sao necessariosalguns usuarios respondendo um questionario sobre todos os produtos para que osoutros usuarios sejam classificados a partir das respostas destes. Na pratica, empresaspagam pessoas para o preenchimento desses formularios.<p>Portanto a partir da escolha das $ak$ linhas, podemos formar uma matriz $V$ de tipos efetivos.<p><i>Escolha das colunas</i><p>A ideia de escolher um numero constante de colunas acontece pois todo usuarioque deseja obter uma recomendacao deve responder inicialmente um pequeno questionario, dando alguma informacao sua para que o algoritmo de recomendacao<b>Ideia da prova</b><p>Primeiramente separa-se os casos em que o usuario faz parte do comite e quandoo usuario nao faz Para o caso em que o usuario faz parte do comite, ele tera que fazer $K$ provas.Para o caso em que o usuario nao esta no comite, e calculada a esperanca do numero de provas que ele tera que fazer. Como a ordem dos produtosrecomendados e aleatoria, o numero de provas que um usuario tera que fazere uma variavel aleatoria geometrica. Logo, basta fazer a analise da esperancapara essa variavel aleatoria [1]<p>.O resultado do teorema aparece com a esperanca do numero de provas paracada caso.<p><i>Comite</i><p>A tecnica de criar um comite do algoritmo proposto possui seriasdesvantagens. A primeira delas e que a complexidade de recomendacao individuale $\Omega(n)$, ja que os usuarios do comite tem que provar todos osalgoritmos. Um segundo ponto contra esta tecnica e a existencia de usuarios desonestos,que, quando escolhidos para o comite, atrapalham o funcionamento do algoritmo de recomendacoes [0].<p><b>Conclusao e trabalhos futuros</b><p>Atraves deste estudo, verificou-se a existencia de solucoes com abordagenstotalmente diferentes para o problema de sistemas de recomendacoes. Mas o maisimportante foi o aprendizado das tecnicas mais gerais para resolucao de problemascomo por exemplo SVD. Potenciais trabalhos futuros sao a implementacao e comparacao dos algoritmos na praticaou alteracao neles para que ao inves de dispor de informacoes de colunas inteiras, osalgoritmos funcionem com posicoes esparsas na matriz. <p><h2>Bibliografia</h2><ul>
+<li> Diferencas entre bits classicos, probabilisticos e quanticos
+<li> Circuitos quanticos
+<li> Algoritmos quanticos tradicionais
+ <ul>
 
-    <li style="display:block">[0] <p> Boney, L., Tewfik, A.H., and Hamdy, K.N., Digital         Watermarks for Audio Signals, Proceedings of the Third IEEE        International Conference on Multimedia, pp. Number-Number, June Number.    <li style="display:block">[1] 
- Goossens, M., Mittelbach, F., Samarin, A LaTeX Companion, Addison-Wesley, Reading, MA, Number.    <li style="display:block">[2] 
- Kopka, H., Daly P.W., A Guide to LaTeX, Addison-Wesley, Reading, MA, Number.    <li style="display:block">[3] 
- Pan, D., A Tutorial on MPEG/Audio Compression, IEEE Multimedia, Vol.Number, pp.Number-Number, Summer Number.</ul>
-<p><p><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\(','\)']]}});</script></body></html>
+ <li> Algoritmo de Deutsch e Deutsch-Josza
+ <li> Algoritmo de Shor
+ <li> Algoritmo de Grover
+ </ul>
+
+</ul>
+<p>Possiveis topicos para estudo em profundidade
+<ul>
+
+<li> Linguagens de programacao quanticas
+<li> Quantum walks
+<li> Maquinas de estado quanticas
+<li> Maquinas de Turing quanticas
+</ul>
+<p>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\(','\)']]}});</script></body></html>

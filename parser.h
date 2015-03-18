@@ -44,20 +44,20 @@
      T_ANY = 260,
      T_PARAGRAPH = 261,
      T_NEWLINE = 262,
-     T_WHITESPACE = 263,
-     T_DOCUMENTCLASS = 264,
-     T_USEPACKAGE = 265,
-     T_TITLE = 266,
-     T_AUTHOR = 267,
-     T_BEGIN = 268,
-     T_END = 269,
-     T_MAKETITLE = 270,
-     T_BOLD = 271,
-     T_ITALIC = 272,
-     T_INCLUDEGRAPHICS = 273,
-     T_CITE = 274,
-     T_BIBITEM = 275,
-     T_ITEM = 276
+     T_DOCUMENTCLASS = 263,
+     T_USEPACKAGE = 264,
+     T_TITLE = 265,
+     T_AUTHOR = 266,
+     T_BEGIN = 267,
+     T_END = 268,
+     T_MAKETITLE = 269,
+     T_BOLD = 270,
+     T_ITALIC = 271,
+     T_INCLUDEGRAPHICS = 272,
+     T_CITE = 273,
+     T_BIBITEM = 274,
+     T_ITEM = 275,
+     T_ESC = 276
    };
 #endif
 /* Tokens.  */
@@ -66,20 +66,20 @@
 #define T_ANY 260
 #define T_PARAGRAPH 261
 #define T_NEWLINE 262
-#define T_WHITESPACE 263
-#define T_DOCUMENTCLASS 264
-#define T_USEPACKAGE 265
-#define T_TITLE 266
-#define T_AUTHOR 267
-#define T_BEGIN 268
-#define T_END 269
-#define T_MAKETITLE 270
-#define T_BOLD 271
-#define T_ITALIC 272
-#define T_INCLUDEGRAPHICS 273
-#define T_CITE 274
-#define T_BIBITEM 275
-#define T_ITEM 276
+#define T_DOCUMENTCLASS 263
+#define T_USEPACKAGE 264
+#define T_TITLE 265
+#define T_AUTHOR 266
+#define T_BEGIN 267
+#define T_END 268
+#define T_MAKETITLE 269
+#define T_BOLD 270
+#define T_ITALIC 271
+#define T_INCLUDEGRAPHICS 272
+#define T_CITE 273
+#define T_BIBITEM 274
+#define T_ITEM 275
+#define T_ESC 276
 
 
 

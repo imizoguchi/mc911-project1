@@ -4,11 +4,8 @@
 
 WHITESPACE [\s]+
 PARAGRAPH "\n"[\s\t]*"\n"+
-NEWLINE "\n"
 STRING [a-zA-Z0-9]+
 DIGIT  [0-9]+
-ANY_CHAR .
-
 DOCUMENTCLASS "\\documentclass"
 USEPACKAGE "\\usepackage"
 TITLE "\\title"	
@@ -22,6 +19,8 @@ INCLUDEGRAPHICS "\\includegraphics"
 CITE "\\cite"
 BIBITEM "\\bibitem"
 ITEM "\\item"
+ESC "\\"[&%$#_{}]
+ANY_CHAR .
 %%
 
 {PARAGRAPH}	{
@@ -74,6 +73,10 @@ ITEM "\\item"
 			yylval.str = (char*) strdup(yytext);
 			return T_STRING;
 		}
+
+{ESC}	{
+		yylval.str = (char*) strdup(yytext);
+		return T_ESC;}
 "{"		{return '{';}
 "}"		{return '}';}
 "["		{return '[';}
