@@ -3,7 +3,7 @@
 %}
 
 WHITESPACE [\s]+
-LINEFEED "\n"
+LINEFEED [\n]
 STRING [a-z][a-zA-Z0-9]*
 DIGIT  [0-9]+
 ANY_CHAR .
@@ -22,7 +22,7 @@ ANY_CHAR .
 
 WHITESPACE {}
 LINEFEED { return T_LINEFEED; }
-([\n\r]|[\n])([\n\r]|[\n])+ { return T_NEWLINE; }
+
 "\\"	{return '\\';}
 "{"		{return '{';}
 "}"		{return '}';}

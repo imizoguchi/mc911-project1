@@ -69,10 +69,6 @@ optional_text:
 	|	/* empty */ { $$ = ""; }
 
 anything:	T_STRING	{ $$ = $1; }
-		|	T_ANY		{ $$ = $1; }
-		|	T_LINEFEED	{ $$ = " "; }
-		|	T_DIGIT		{	sprintf(buffer, "%d", $1);
-							$$ = strdup(buffer);}
 %%
 
 void yyerror(const char* errmsg)

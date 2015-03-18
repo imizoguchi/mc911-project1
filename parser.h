@@ -42,29 +42,57 @@
      T_DIGIT = 258,
      T_STRING = 259,
      T_ANY = 260,
-     T_NEWLINE = 261,
-     T_DOCUMENTCLASS = 262
+     T_PARAGRAPH = 261,
+     T_NEWLINE = 262,
+     T_WHITESPACE = 263,
+     T_DOCUMENTCLASS = 264,
+     T_USEPACKAGE = 265,
+     T_TITLE = 266,
+     T_AUTHOR = 267,
+     T_BEGIN = 268,
+     T_END = 269,
+     T_MAKETITLE = 270,
+     T_BOLD = 271,
+     T_ITALIC = 272,
+     T_INCLUDEGRAPHICS = 273,
+     T_CITE = 274,
+     T_BIBITEM = 275,
+     T_ITEM = 276
    };
 #endif
 /* Tokens.  */
 #define T_DIGIT 258
 #define T_STRING 259
 #define T_ANY 260
-#define T_NEWLINE 261
-#define T_DOCUMENTCLASS 262
+#define T_PARAGRAPH 261
+#define T_NEWLINE 262
+#define T_WHITESPACE 263
+#define T_DOCUMENTCLASS 264
+#define T_USEPACKAGE 265
+#define T_TITLE 266
+#define T_AUTHOR 267
+#define T_BEGIN 268
+#define T_END 269
+#define T_MAKETITLE 270
+#define T_BOLD 271
+#define T_ITALIC 272
+#define T_INCLUDEGRAPHICS 273
+#define T_CITE 274
+#define T_BIBITEM 275
+#define T_ITEM 276
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 20 "parser.y"
+#line 28 "parser.y"
 {
 	char *str;
 	int intval;
 }
 /* Line 1529 of yacc.c.  */
-#line 68 "parser.h"
+#line 96 "parser.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

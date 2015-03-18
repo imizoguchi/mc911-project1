@@ -3,15 +3,15 @@
 %}
 
 WHITESPACE [\s]+
-PARAGRAPH "[\n\t]+\n"
+PARAGRAPH "\n"[\s\t]*"\n"+
 NEWLINE "\n"
-STRING [a-z][a-zA-Z0-9]*
+STRING [a-zA-Z0-9]+
 DIGIT  [0-9]+
 ANY_CHAR .
 
 DOCUMENTCLASS "\\documentclass"
 USEPACKAGE "\\usepackage"
-TITLE "\\title"
+TITLE "\\title"	
 AUTHOR "\\author"
 BEGIN "\\begin"
 END "\\end"
@@ -24,45 +24,48 @@ BIBITEM "\\bibitem"
 ITEM "\\item"
 %%
 
-{DOCUMENTCLASS}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_DOCUMENTCLASS; }
-{USEPACKAGE}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_USEPACKAGE; }
-{TITLE}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_TITLE; }
-{AUTHOR}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_AUTHOR; }
-{BEGIN}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_BEGIN; }
-{END}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_END; }
-{MAKETITLE}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_MAKETITLE; }
-{BOLD}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_BOLD; }
-{ITALIC}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_ITALIC; }
-{INCLUDEGRAPHICS}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_INCLUDEGRAPHICS; }
-{CITE}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_CITE; }
-{BIBITEM}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_BIBITEM; }
-{ITEM}
-	{ 	yylval.str = (char*) strdup(yytext);
-		return T_ITEM; }
+{PARAGRAPH}	{
+			return T_PARAGRAPH;
+		}
+{DOCUMENTCLASS} { 	yylval.str = (char*) strdup(yytext);
+		return T_DOCUMENTCLASS;
+	}
+{USEPACKAGE}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_USEPACKAGE;
+	}
+{TITLE}		{ 	yylval.str = (char*) strdup(yytext);
+		return T_TITLE;
+	}
+{AUTHOR}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_AUTHOR;
+	}
+{BEGIN}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_BEGIN;
+	}
+{END}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_END;
+	}
+{MAKETITLE}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_MAKETITLE;
+	}
+{BOLD}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_BOLD;
+	}
+{ITALIC}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_ITALIC;
+	}
+{INCLUDEGRAPHICS}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_INCLUDEGRAPHICS;
+	}
+{CITE}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_CITE;
+	}
+{BIBITEM}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_BIBITEM;
+	}
+{ITEM}	{ 	yylval.str = (char*) strdup(yytext);
+		return T_ITEM;
+	}
 {DIGIT}		{
 			yylval.intval = strtol(yytext, NULL,10);
 			return T_DIGIT;
@@ -71,8 +74,6 @@ ITEM "\\item"
 			yylval.str = (char*) strdup(yytext);
 			return T_STRING;
 		}
-
-WHITESPACE {}
 "{"		{return '{';}
 "}"		{return '}';}
 "["		{return '[';}

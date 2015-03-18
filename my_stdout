@@ -1,0 +1,142 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{algorithmic}
+\usepackage{amssymb}
+
+
+
+
+\begin{document}
+\maketitle
+
+\textbf{Introducao}
+
+
+
+
+
+
+
+
+
+O objetivo deste relatorio e descrever os assuntos estudados durante a disciplina de MC032 no segundo semestre de Number. O principal interessedeste trabalho foi pesquisar na literatura sobreo problema de sistemas de recomendacoes e diferentes abordagens para resolve-lo. Na secao Number e descrito em linhas gerais o que e um sistema de recomendacoes. Nas secoes Number e Number sao mostradas asprincipais ideias encontradas nos trabalhos  ,respectivamente. Na secao Number encontra-se a conclusao do estudo e ideias para trabalhos futuros.
+
+\textbf{Sistemas de recomendacoes}
+
+
+
+
+
+
+
+
+Um sistema de recomendacoes tem como objetivo recomendar a usuariosprodutos que o agradem. Para isso, o sistema de recomedacoes se baseiainicialmente em respostas ja conhecidas de outros usuarios e algumainformacao sobre o usuario que deseja obter uma recomendacao. O conjunto de informacao inicial que o sistema de recomendacoes japossui e utilizado para comparar com a informacao obtida do usuarioem questao para tentar deduzir quais outros produtos interessamao usuario. 
+
+\textbf{Competitive Recommendation Systems}
+
+\textit{Introducao}
+
+
+
+
+
+A ideia basica desta abordagem e reduzir o problema de sistema de recomendacoesno problema de reconstrucao de matrizes a partir de informacoes parciais da mesma. Foram utilizadas estrategias de reconstrucao de matrizesbaseadas na tecnica de SVD, encontrando boas aproximacoespara a matriz original 
+
+\textit{Divisao em tipos}
+
+
+
+Assume-se que os usuarios podem ser divididos em grupos com interesses semelhantes,classificando-os em tipos. Consideraremos que $k$ seja o numero de tipos, onde $k$ euma constante que nao depende do numero de usuarios.
+
+\textit{Qualidade dos algoritmos}
+
+
+
+Um bom algoritmo de recomendacoes deve dar boas recomendacoes utilizando o minimo de informacao possivel. Sao estabelecidas Number metricas para medir a qualidade de um algoritmode recomendacoes.
+
+
+ Um algoritmo e $c-competitivo$ $para$ $amostragem$ se usa somente $ck$linhas e colunas da matriz para recomendar mais produtos.
+
+
+Um algoritmo e $f-competitivo$ $para$ $utilidade$se faz boas recomendacoes a $fm$ usuarios, onde $m$ e o numero de usuarios. 
+
+\textit{Notacao}
+
+Nesta secao, a seguinte notacao sera utilizada:
+
+\begin{itemize}
+\item[A]
+ matriz de recomendacao original\item[Aij]
+ valor da utilidade do produto j para o usuario i\item[A(i)]
+
+ i-esima linha da matriz A, que corresponde aovetor de utilidades do i-esimo usuario.\item[A(i)]
+
+ i-esima coluna a matriz A, que corresponde a utilidade de um produto para todos os usuarios.\item[Ak]
+ Melhor aproximacao com posto k de A, obtida atraves da tecnica de SVD.\item[air]
+
+ valor da utilidade do r-esimo produto com maior utilidadepara o usuario i \end{itemize}
+
+\textit{Reconstrucao de matrizes}
+
+\textit{Escolha das linhas}
+
+
+
+
+A escolha de um numero constante de linhas segue a ideia de que sao necessariosalguns usuarios respondendo um questionario sobre todos os produtos para que osoutros usuarios sejam classificados a partir das respostas destes. Na pratica, empresaspagam pessoas para o preenchimento desses formularios.
+
+Portanto a partir da escolha das $ak$ linhas, podemos formar uma matriz $V$ de tipos efetivos.
+
+\textit{Escolha das colunas}
+
+
+
+
+A ideia de escolher um numero constante de colunas acontece pois todo usuarioque deseja obter uma recomendacao deve responder inicialmente um pequeno questionario, dando alguma informacao sua para que o algoritmo de recomendacao\textbf{Ideia da prova}
+
+
+
+
+
+
+
+
+Primeiramente separa-se os casos em que o usuario faz parte do comite e quandoo usuario nao faz Para o caso em que o usuario faz parte do comite, ele tera que fazer $K$ provas.Para o caso em que o usuario nao esta no comite, e calculada a esperanca do numero de provas que ele tera que fazer. Como a ordem dos produtosrecomendados e aleatoria, o numero de provas que um usuario tera que fazere uma variavel aleatoria geometrica. Logo, basta fazer a analise da esperancapara essa variavel aleatoria \cite{MG}
+
+.O resultado do teorema aparece com a esperanca do numero de provas paracada caso.
+
+\textit{Comite}
+
+
+
+
+
+
+
+A tecnica de criar um comite do algoritmo proposto possui seriasdesvantagens. A primeira delas e que a complexidade de recomendacao individuale $\Omega(n)$, ja que os usuarios do comite tem que provar todos osalgoritmos. Um segundo ponto contra esta tecnica e a existencia de usuarios desonestos,que, quando escolhidos para o comite, atrapalham o funcionamento do algoritmo de recomendacoes \cite{Boney96}.
+
+\textbf{Conclusao e trabalhos futuros}
+
+
+
+
+
+
+
+Atraves deste estudo, verificou-se a existencia de solucoes com abordagenstotalmente diferentes para o problema de sistemas de recomendacoes. Mas o maisimportante foi o aprendizado das tecnicas mais gerais para resolucao de problemascomo por exemplo SVD. Potenciais trabalhos futuros sao a implementacao e comparacao dos algoritmos na praticaou alteracao neles para que ao inves de dispor de informacoes de colunas inteiras, osalgoritmos funcionem com posicoes esparsas na matriz. 
+
+\begin{thebibliography}
+    \bibitem{Boney96}
+
+
+ Boney, L., Tewfik, A.H., and Hamdy, K.N., Digital         Watermarks for Audio Signals, Proceedings of the Third IEEE        International Conference on Multimedia, pp. Number-Number, June Number.    \bibitem{MG}
+ Goossens, M., Mittelbach, F., Samarin, A LaTeX Companion, Addison-Wesley, Reading, MA, Number.    \bibitem{HK}
+ Kopka, H., Daly P.W., A Guide to LaTeX, Addison-Wesley, Reading, MA, Number.    \bibitem{Pan}
+ Pan, D., A Tutorial on MPEG/Audio Compression, IEEE Multimedia, Vol.Number, pp.Number-Number, Summer Number.\end{thebibliography}
+
+\end{document}
+
