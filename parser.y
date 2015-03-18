@@ -15,8 +15,8 @@ char *treat_special_characters(char *);
 int streq(char *str1, char *str2);
 int executeCommand(char *cmd, char *arg, char *opt_arg);
 
-char *buf_title;
-char *buf_author;
+char *buf_title = "";
+char *buf_author = "";
 char buffer[256];
 char *reference[50];
 int refIt = 0;
@@ -75,9 +75,11 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 			{
 				if(state == 0)
 					printf("%s[%s]{%s}", $1, $3, $6);
-				else
-					printf("<html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script><script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script><script type=\"text/javascript\"></head><body>");
-
+			}
+	|	T_DOCUMENTCLASS '{' text '}'
+			{
+				if(state == 0)
+					printf("%s{%s}", $1, $3);
 			}
 	|	T_USEPACKAGE '[' text ']' '{' text '}'
 			{
@@ -132,7 +134,7 @@ cmd:	T_DOCUMENTCLASS '[' text ']' '{' text '}'
 				if(state == 0) {
 					printf("%s", $1);
 				} else {
-					printf("<h1>%s</h1>\n", buf_title);
+					printf("<h1>%s</h1><h2>%s</h2>\n", buf_title, buf_author);
 				}
 			}
 	|	T_BOLD '{' text '}'
@@ -335,7 +337,14 @@ int main(int argc, char *argv[])
 	yyin = fopen("my_stdout", "r");
 
 	state = 1;
+
+	// Header
+	printf("<html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script><script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script></head><body>");
+	
 	yyparse();
+	
+	// Footer
+	printf("<script type=\"text/x-mathjax-config\">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script></body></html>");
 
 	return 0;
 }
