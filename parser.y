@@ -331,7 +331,7 @@ int main(int argc, char *argv[])
 	state = 0;
 	yyparse();
 
-	freopen("output.html", "w", stdout);
+	freopen(argv[2], "w", stdout);
 	yyin = fopen("my_stdout", "r");
 
 	state = 1;
